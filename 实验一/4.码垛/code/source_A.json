@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-11-10T11:02:20.887313+00:00",
+  "experiment": "4_coin_transfer",
+  "point": "source_A",
+  "port": "COM7",
+  "pose": {
+    "x": 80.59455108642578,
+    "y": -166.25999450683594,
+    "z": -67.09537506103516,
+    "r": -148.1063232421875,
+    "j1": -64.1382064819336,
+    "j2": 54.1473388671875,
+    "j3": 83.89115905761719,
+    "j4": -83.96812438964844
+  },
+  "tool_offset": {
+    "x": 59.70000076293945,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "alarm_bytes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "suction_state": {
+    "read_code": 0,
+    "control_enabled": false,
+    "suction_on": false
+  },
+  "motion_sent": false,
+  "note": "User confirmed: suction cup contacts the upper face of a single coin.",
+  "contact_reference": "User confirmed: suction cup contacts the upper face of a single coin."
+}

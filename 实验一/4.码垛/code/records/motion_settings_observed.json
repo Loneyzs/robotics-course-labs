@@ -1,0 +1,37 @@
+{
+  "timestamp": "2026-11-10T11:07:09.456831+00:00",
+  "joint_velocity_deg_s": [
+    200.0,
+    200.0,
+    200.0,
+    200.0
+  ],
+  "joint_acceleration_deg_s2": [
+    200.0,
+    200.0,
+    200.0,
+    200.0
+  ],
+  "coordinate": {
+    "xyz_velocity": 6.0,
+    "r_velocity": 10.0,
+    "xyz_acceleration": 15.0,
+    "r_acceleration": 20.0
+  },
+  "ratio_percent": {
+    "velocity": 100.0,
+    "acceleration": 100.0
+  },
+  "pose": {
+    "x": 123.99547576904297,
+    "y": -263.8197021484375,
+    "z": -67.97476196289062,
+    "r": -148.7945556640625,
+    "j1": -64.8264389038086,
+    "j2": 73.78116607666016,
+    "j3": 45.965354919433594,
+    "j4": -83.96812438964844
+  },
+  "motion_sent": false,
+  "factory_default_verified": false
+}

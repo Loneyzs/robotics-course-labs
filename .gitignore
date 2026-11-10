@@ -1,0 +1,24 @@
+# 本机临时文件和编译缓存
+~$*
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.vs/
+ipch/
+*.ipch
+*.sdf
+*.opensdf
+*.pch
+*.pdb
+*.ilk
+*.obj
+*.idb
+*.suo
+*.user
+*.tlog
+*.lastbuildstate
+.DS_Store
+Thumbs.db
+STOP_REQUESTED
+.env
+.env.*

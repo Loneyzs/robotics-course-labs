@@ -1,0 +1,33 @@
+{
+  "port": "COM7",
+  "origin": [
+    71.591521859169,
+    -239.5511703491211
+  ],
+  "paper_z": -62.89481885877946,
+  "r": -158.7218017578125,
+  "tool_offset": {
+    "x": 59.70000076293945,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "lift": 8,
+  "limits": {
+    "x": [
+      16.02604603767395,
+      127.15699768066406
+    ],
+    "y": [
+      -298.57501220703125,
+      -180.52732849121094
+    ],
+    "z": [
+      -63.39481885877946,
+      -32.89481885877946
+    ]
+  },
+  "timestamp": "2026-11-10T10:55:33.801446+00:00",
+  "calibration_source": "User confirmed visible ink in the 10 mm diagonal trial and explicitly requested drawing at that height. Constant Z uses the end contact height of that trial.",
+  "size": 10,
+  "repeats": 10
+}

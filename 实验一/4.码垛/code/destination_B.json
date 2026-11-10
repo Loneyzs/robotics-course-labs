@@ -1,0 +1,42 @@
+{
+  "timestamp": "2026-11-10T11:06:03.404981+00:00",
+  "experiment": "4_coin_transfer",
+  "point": "destination_B",
+  "port": "COM7",
+  "pose": {
+    "x": 123.99547576904297,
+    "y": -263.8197021484375,
+    "z": -67.97476196289062,
+    "r": -148.7945556640625,
+    "j1": -64.8264389038086,
+    "j2": 73.78116607666016,
+    "j3": 45.965354919433594,
+    "j4": -83.96812438964844
+  },
+  "tool_offset": {
+    "x": 59.70000076293945,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "alarm_bytes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "motion_sent": false,
+  "note": "User confirmed: empty suction cup contacts the destination tabletop; latest non-limit destination.",
+  "contact_reference": "User confirmed: empty suction cup contacts the destination tabletop; latest non-limit destination."
+}

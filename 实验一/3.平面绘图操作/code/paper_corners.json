@@ -1,0 +1,51 @@
+{
+  "lower_left": {
+    "x": 147.15699768066406,
+    "y": -160.52732849121094,
+    "z": -61.59343719482422,
+    "r": -115.49533081054688,
+    "j1": -47.48820495605469,
+    "j2": 54.96116638183594,
+    "j3": 71.132080078125,
+    "j4": -68.00712585449219
+  },
+  "upper_right": {
+    "x": -3.97395396232605,
+    "y": -318.57501220703125,
+    "z": -64.08238220214844,
+    "r": -158.7218017578125,
+    "j1": -90.71467590332031,
+    "j2": 84.0942153930664,
+    "j3": 32.034385681152344,
+    "j4": -68.00712585449219
+  },
+  "delta_xyz": {
+    "x": -151.1309516429901,
+    "y": -158.0476837158203,
+    "z": -2.4889450073242188
+  },
+  "diagonal_xy": 218.6770103884992,
+  "center_xy": [
+    71.591521859169,
+    -239.5511703491211
+  ],
+  "tool_offset_change": {
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "r_change": -43.226470947265625,
+  "motion_sent": false,
+  "validation": {
+    "measured_diagonal_xy_mm": 218.6770103884992,
+    "contact_z_difference_mm": -2.4889450073242188,
+    "ready_for_full_pattern": false,
+    "diagonal_trial_executed": true,
+    "notes": [
+      "Upper-right point is near joint limit; keep drawings inside the region.",
+      "Two points support height interpolation along their connecting line.",
+      "A third non-collinear contact point is needed to determine the paper plane for an area pattern."
+    ]
+  },
+  "region_description": "User-confirmed approximate drawable region; not a full A4 sheet."
+}

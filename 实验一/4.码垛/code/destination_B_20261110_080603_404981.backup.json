@@ -1,0 +1,46 @@
+{
+  "timestamp": "2026-11-10T11:04:23.219664+00:00",
+  "experiment": "4_coin_transfer",
+  "point": "destination_B",
+  "port": "COM7",
+  "pose": {
+    "x": 129.81607055664062,
+    "y": -294.74176025390625,
+    "z": -67.66631317138672,
+    "r": -150.197509765625,
+    "j1": -66.22938537597656,
+    "j2": 87.64974975585938,
+    "j3": 29.866153717041016,
+    "j4": -83.96812438964844
+  },
+  "tool_offset": {
+    "x": 59.70000076293945,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "alarm_bytes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "suction_state": {
+    "read_code": 0,
+    "control_enabled": false,
+    "suction_on": false
+  },
+  "motion_sent": false,
+  "note": "User positioned the tool at the target. Stack reference layer has not been specified."
+}
