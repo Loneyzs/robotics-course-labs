@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-11-17T09:24:32.056711+00:00",
+  "experiment": "4_coin_transfer",
+  "coin_count": 10,
+  "point": "destination_B",
+  "port": "COM8",
+  "pose": {
+    "x": 72.53417205810547,
+    "y": -238.12271118164062,
+    "z": -70.05552673339844,
+    "r": 49.85694885253906,
+    "j1": -73.05882263183594,
+    "j2": 63.56758117675781,
+    "j3": 62.29733657836914,
+    "j4": 122.915771484375
+  },
+  "tool_offset": {
+    "x": 59.70000076293945,
+    "y": 0.0,
+    "z": 0.0
+  },
+  "alarm_bytes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "suction_state": {
+    "read_code": 0,
+    "control_enabled": false,
+    "suction_on": false
+  },
+  "motion_sent": false,
+  "contact_reference": "User positioned suction cup near the destination tabletop; destination stack initially empty."
+}

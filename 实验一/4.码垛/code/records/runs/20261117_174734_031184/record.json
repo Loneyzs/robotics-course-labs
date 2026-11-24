@@ -1,0 +1,2662 @@
+{
+  "timestamp": "2026-11-17T09:47:34.031184+00:00",
+  "completed": false,
+  "plan": {
+    "coin_count": 10,
+    "coin_thickness_mm": 1.870079803466797,
+    "thickness_source": "User-approved estimate: (A initial stack top Z - B tabletop Z) / 10; assumes same horizontal tabletop.",
+    "source_table_z_estimate_mm": -70.05552673339844,
+    "destination_full_stack_top_z_mm": -51.35472869873047,
+    "source": {
+      "x": -17.11852264404297,
+      "y": -240.19921875,
+      "z": -51.35472869873047,
+      "r": 28.83930206298828,
+      "j1": -94.07646942138672,
+      "j2": 54.92838668823242,
+      "j3": 61.28802490234375,
+      "j4": 122.915771484375
+    },
+    "destination": {
+      "x": 72.53417205810547,
+      "y": -238.12271118164062,
+      "z": -70.05552673339844,
+      "r": 49.85694885253906,
+      "j1": -73.05882263183594,
+      "j2": 63.56758117675781,
+      "j3": 62.29733657836914,
+      "j4": 122.915771484375
+    },
+    "start_tolerance": {
+      "xy_mm": 15.0,
+      "z_mm": 10.0,
+      "r_deg": 15.0
+    },
+    "start_alignment": "near A -> lift -> align above recorded A -> descend before suction",
+    "distance_xy_mm": 89.67673918602353,
+    "obstacle_height_mm": 30.0,
+    "obstacle_height_source": "user estimate",
+    "clearance_mm": 20.0,
+    "travel_z_mm": -18.18544692993164,
+    "release_z_mm": -67.18544692993164,
+    "verification_z_mm": -18.18544692993164,
+    "last_release_z_mm": -50.35472869873047,
+    "cycles": [
+      {
+        "coin_index": 1,
+        "pick_z_mm": -51.35472869873047,
+        "source_remaining_before_pick": 10,
+        "destination_count_before_release": 0,
+        "destination_existing_top_z_mm": -70.05552673339844,
+        "release_z_mm": -67.18544692993164,
+        "verification_z_mm": -18.18544692993164,
+        "release_bottom_gap_mm": 1.0,
+        "steps": [
+          {
+            "kind": "suction",
+            "label": "打开吸盘",
+            "on": true,
+            "milestone": "grip_started_s",
+            "coin_index": 1
+          },
+          {
+            "kind": "wait",
+            "label": "等待吸附",
+            "seconds": 0.6,
+            "coin_index": 1
+          },
+          {
+            "kind": "move",
+            "label": "携币竖直抬升越障高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 1
+          },
+          {
+            "kind": "move",
+            "label": "在高处旋转180度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 1
+          },
+          {
+            "kind": "move",
+            "label": "保持高位越过障碍到B上方",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 1
+          },
+          {
+            "kind": "move",
+            "label": "下降至本层放币高度",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -67.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 1
+          },
+          {
+            "kind": "suction",
+            "label": "关闭吸盘释放硬币",
+            "on": false,
+            "coin_index": 1
+          },
+          {
+            "kind": "wait",
+            "label": "等待泄压释放",
+            "seconds": 0.8,
+            "milestone": "release_finished_s",
+            "coin_index": 1
+          },
+          {
+            "kind": "move",
+            "label": "释放后竖直抬起验证",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "milestone": "verification_lift_finished_s",
+            "coin_index": 1
+          },
+          {
+            "kind": "wait",
+            "label": "停留供观察和拍摄",
+            "seconds": 0.5,
+            "coin_index": 1
+          },
+          {
+            "kind": "move",
+            "label": "空吸盘反向恢复初始腕角",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": 49.85694885253906
+            },
+            "milestone": "cycle_finished_s",
+            "coin_index": 1
+          }
+        ]
+      },
+      {
+        "coin_index": 2,
+        "pick_z_mm": -53.22480850219726,
+        "source_remaining_before_pick": 9,
+        "destination_count_before_release": 1,
+        "destination_existing_top_z_mm": -68.18544692993164,
+        "release_z_mm": -65.31536712646485,
+        "verification_z_mm": -18.18544692993164,
+        "release_bottom_gap_mm": 1.0,
+        "steps": [
+          {
+            "kind": "move",
+            "label": "空吸盘高位返回A",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 2
+          },
+          {
+            "kind": "move",
+            "label": "下降到下一层取币高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -53.22480850219726,
+              "r": 28.83930206298828
+            },
+            "coin_index": 2
+          },
+          {
+            "kind": "suction",
+            "label": "打开吸盘",
+            "on": true,
+            "milestone": "grip_started_s",
+            "coin_index": 2
+          },
+          {
+            "kind": "wait",
+            "label": "等待吸附",
+            "seconds": 0.6,
+            "coin_index": 2
+          },
+          {
+            "kind": "move",
+            "label": "携币竖直抬升越障高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 2
+          },
+          {
+            "kind": "move",
+            "label": "在高处旋转180度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 2
+          },
+          {
+            "kind": "move",
+            "label": "保持高位越过障碍到B上方",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 2
+          },
+          {
+            "kind": "move",
+            "label": "下降至本层放币高度",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -65.31536712646485,
+              "r": -151.16069793701172
+            },
+            "coin_index": 2
+          },
+          {
+            "kind": "suction",
+            "label": "关闭吸盘释放硬币",
+            "on": false,
+            "coin_index": 2
+          },
+          {
+            "kind": "wait",
+            "label": "等待泄压释放",
+            "seconds": 0.8,
+            "milestone": "release_finished_s",
+            "coin_index": 2
+          },
+          {
+            "kind": "move",
+            "label": "释放后竖直抬起验证",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "milestone": "verification_lift_finished_s",
+            "coin_index": 2
+          },
+          {
+            "kind": "wait",
+            "label": "停留供观察和拍摄",
+            "seconds": 0.5,
+            "coin_index": 2
+          },
+          {
+            "kind": "move",
+            "label": "空吸盘反向恢复初始腕角",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": 49.85694885253906
+            },
+            "milestone": "cycle_finished_s",
+            "coin_index": 2
+          }
+        ]
+      },
+      {
+        "coin_index": 3,
+        "pick_z_mm": -55.094888305664064,
+        "source_remaining_before_pick": 8,
+        "destination_count_before_release": 2,
+        "destination_existing_top_z_mm": -66.31536712646485,
+        "release_z_mm": -63.44528732299804,
+        "verification_z_mm": -18.18544692993164,
+        "release_bottom_gap_mm": 1.0,
+        "steps": [
+          {
+            "kind": "move",
+            "label": "空吸盘高位返回A",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 3
+          },
+          {
+            "kind": "move",
+            "label": "下降到下一层取币高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -55.094888305664064,
+              "r": 28.83930206298828
+            },
+            "coin_index": 3
+          },
+          {
+            "kind": "suction",
+            "label": "打开吸盘",
+            "on": true,
+            "milestone": "grip_started_s",
+            "coin_index": 3
+          },
+          {
+            "kind": "wait",
+            "label": "等待吸附",
+            "seconds": 0.6,
+            "coin_index": 3
+          },
+          {
+            "kind": "move",
+            "label": "携币竖直抬升越障高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 3
+          },
+          {
+            "kind": "move",
+            "label": "在高处旋转180度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 3
+          },
+          {
+            "kind": "move",
+            "label": "保持高位越过障碍到B上方",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 3
+          },
+          {
+            "kind": "move",
+            "label": "下降至本层放币高度",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -63.44528732299804,
+              "r": -151.16069793701172
+            },
+            "coin_index": 3
+          },
+          {
+            "kind": "suction",
+            "label": "关闭吸盘释放硬币",
+            "on": false,
+            "coin_index": 3
+          },
+          {
+            "kind": "wait",
+            "label": "等待泄压释放",
+            "seconds": 0.8,
+            "milestone": "release_finished_s",
+            "coin_index": 3
+          },
+          {
+            "kind": "move",
+            "label": "释放后竖直抬起验证",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "milestone": "verification_lift_finished_s",
+            "coin_index": 3
+          },
+          {
+            "kind": "wait",
+            "label": "停留供观察和拍摄",
+            "seconds": 0.5,
+            "coin_index": 3
+          },
+          {
+            "kind": "move",
+            "label": "空吸盘反向恢复初始腕角",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": 49.85694885253906
+            },
+            "milestone": "cycle_finished_s",
+            "coin_index": 3
+          }
+        ]
+      },
+      {
+        "coin_index": 4,
+        "pick_z_mm": -56.96496810913086,
+        "source_remaining_before_pick": 7,
+        "destination_count_before_release": 3,
+        "destination_existing_top_z_mm": -64.44528732299804,
+        "release_z_mm": -61.57520751953125,
+        "verification_z_mm": -18.18544692993164,
+        "release_bottom_gap_mm": 1.0,
+        "steps": [
+          {
+            "kind": "move",
+            "label": "空吸盘高位返回A",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 4
+          },
+          {
+            "kind": "move",
+            "label": "下降到下一层取币高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -56.96496810913086,
+              "r": 28.83930206298828
+            },
+            "coin_index": 4
+          },
+          {
+            "kind": "suction",
+            "label": "打开吸盘",
+            "on": true,
+            "milestone": "grip_started_s",
+            "coin_index": 4
+          },
+          {
+            "kind": "wait",
+            "label": "等待吸附",
+            "seconds": 0.6,
+            "coin_index": 4
+          },
+          {
+            "kind": "move",
+            "label": "携币竖直抬升越障高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 4
+          },
+          {
+            "kind": "move",
+            "label": "在高处旋转180度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 4
+          },
+          {
+            "kind": "move",
+            "label": "保持高位越过障碍到B上方",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 4
+          },
+          {
+            "kind": "move",
+            "label": "下降至本层放币高度",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -61.57520751953125,
+              "r": -151.16069793701172
+            },
+            "coin_index": 4
+          },
+          {
+            "kind": "suction",
+            "label": "关闭吸盘释放硬币",
+            "on": false,
+            "coin_index": 4
+          },
+          {
+            "kind": "wait",
+            "label": "等待泄压释放",
+            "seconds": 0.8,
+            "milestone": "release_finished_s",
+            "coin_index": 4
+          },
+          {
+            "kind": "move",
+            "label": "释放后竖直抬起验证",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "milestone": "verification_lift_finished_s",
+            "coin_index": 4
+          },
+          {
+            "kind": "wait",
+            "label": "停留供观察和拍摄",
+            "seconds": 0.5,
+            "coin_index": 4
+          },
+          {
+            "kind": "move",
+            "label": "空吸盘反向恢复初始腕角",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": 49.85694885253906
+            },
+            "milestone": "cycle_finished_s",
+            "coin_index": 4
+          }
+        ]
+      },
+      {
+        "coin_index": 5,
+        "pick_z_mm": -58.83504791259766,
+        "source_remaining_before_pick": 6,
+        "destination_count_before_release": 4,
+        "destination_existing_top_z_mm": -62.57520751953125,
+        "release_z_mm": -59.70512771606445,
+        "verification_z_mm": -18.18544692993164,
+        "release_bottom_gap_mm": 1.0,
+        "steps": [
+          {
+            "kind": "move",
+            "label": "空吸盘高位返回A",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 5
+          },
+          {
+            "kind": "move",
+            "label": "下降到下一层取币高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -58.83504791259766,
+              "r": 28.83930206298828
+            },
+            "coin_index": 5
+          },
+          {
+            "kind": "suction",
+            "label": "打开吸盘",
+            "on": true,
+            "milestone": "grip_started_s",
+            "coin_index": 5
+          },
+          {
+            "kind": "wait",
+            "label": "等待吸附",
+            "seconds": 0.6,
+            "coin_index": 5
+          },
+          {
+            "kind": "move",
+            "label": "携币竖直抬升越障高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 5
+          },
+          {
+            "kind": "move",
+            "label": "在高处旋转180度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 5
+          },
+          {
+            "kind": "move",
+            "label": "保持高位越过障碍到B上方",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 5
+          },
+          {
+            "kind": "move",
+            "label": "下降至本层放币高度",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -59.70512771606445,
+              "r": -151.16069793701172
+            },
+            "coin_index": 5
+          },
+          {
+            "kind": "suction",
+            "label": "关闭吸盘释放硬币",
+            "on": false,
+            "coin_index": 5
+          },
+          {
+            "kind": "wait",
+            "label": "等待泄压释放",
+            "seconds": 0.8,
+            "milestone": "release_finished_s",
+            "coin_index": 5
+          },
+          {
+            "kind": "move",
+            "label": "释放后竖直抬起验证",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "milestone": "verification_lift_finished_s",
+            "coin_index": 5
+          },
+          {
+            "kind": "wait",
+            "label": "停留供观察和拍摄",
+            "seconds": 0.5,
+            "coin_index": 5
+          },
+          {
+            "kind": "move",
+            "label": "空吸盘反向恢复初始腕角",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": 49.85694885253906
+            },
+            "milestone": "cycle_finished_s",
+            "coin_index": 5
+          }
+        ]
+      },
+      {
+        "coin_index": 6,
+        "pick_z_mm": -60.70512771606445,
+        "source_remaining_before_pick": 5,
+        "destination_count_before_release": 5,
+        "destination_existing_top_z_mm": -60.70512771606445,
+        "release_z_mm": -57.83504791259766,
+        "verification_z_mm": -18.18544692993164,
+        "release_bottom_gap_mm": 1.0,
+        "steps": [
+          {
+            "kind": "move",
+            "label": "空吸盘高位返回A",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 6
+          },
+          {
+            "kind": "move",
+            "label": "下降到下一层取币高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -60.70512771606445,
+              "r": 28.83930206298828
+            },
+            "coin_index": 6
+          },
+          {
+            "kind": "suction",
+            "label": "打开吸盘",
+            "on": true,
+            "milestone": "grip_started_s",
+            "coin_index": 6
+          },
+          {
+            "kind": "wait",
+            "label": "等待吸附",
+            "seconds": 0.6,
+            "coin_index": 6
+          },
+          {
+            "kind": "move",
+            "label": "携币竖直抬升越障高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 6
+          },
+          {
+            "kind": "move",
+            "label": "在高处旋转180度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 6
+          },
+          {
+            "kind": "move",
+            "label": "保持高位越过障碍到B上方",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 6
+          },
+          {
+            "kind": "move",
+            "label": "下降至本层放币高度",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -57.83504791259766,
+              "r": -151.16069793701172
+            },
+            "coin_index": 6
+          },
+          {
+            "kind": "suction",
+            "label": "关闭吸盘释放硬币",
+            "on": false,
+            "coin_index": 6
+          },
+          {
+            "kind": "wait",
+            "label": "等待泄压释放",
+            "seconds": 0.8,
+            "milestone": "release_finished_s",
+            "coin_index": 6
+          },
+          {
+            "kind": "move",
+            "label": "释放后竖直抬起验证",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "milestone": "verification_lift_finished_s",
+            "coin_index": 6
+          },
+          {
+            "kind": "wait",
+            "label": "停留供观察和拍摄",
+            "seconds": 0.5,
+            "coin_index": 6
+          },
+          {
+            "kind": "move",
+            "label": "空吸盘反向恢复初始腕角",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": 49.85694885253906
+            },
+            "milestone": "cycle_finished_s",
+            "coin_index": 6
+          }
+        ]
+      },
+      {
+        "coin_index": 7,
+        "pick_z_mm": -62.57520751953125,
+        "source_remaining_before_pick": 4,
+        "destination_count_before_release": 6,
+        "destination_existing_top_z_mm": -58.83504791259766,
+        "release_z_mm": -55.96496810913086,
+        "verification_z_mm": -18.18544692993164,
+        "release_bottom_gap_mm": 1.0,
+        "steps": [
+          {
+            "kind": "move",
+            "label": "空吸盘高位返回A",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 7
+          },
+          {
+            "kind": "move",
+            "label": "下降到下一层取币高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -62.57520751953125,
+              "r": 28.83930206298828
+            },
+            "coin_index": 7
+          },
+          {
+            "kind": "suction",
+            "label": "打开吸盘",
+            "on": true,
+            "milestone": "grip_started_s",
+            "coin_index": 7
+          },
+          {
+            "kind": "wait",
+            "label": "等待吸附",
+            "seconds": 0.6,
+            "coin_index": 7
+          },
+          {
+            "kind": "move",
+            "label": "携币竖直抬升越障高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 7
+          },
+          {
+            "kind": "move",
+            "label": "在高处旋转180度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 7
+          },
+          {
+            "kind": "move",
+            "label": "保持高位越过障碍到B上方",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 7
+          },
+          {
+            "kind": "move",
+            "label": "下降至本层放币高度",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -55.96496810913086,
+              "r": -151.16069793701172
+            },
+            "coin_index": 7
+          },
+          {
+            "kind": "suction",
+            "label": "关闭吸盘释放硬币",
+            "on": false,
+            "coin_index": 7
+          },
+          {
+            "kind": "wait",
+            "label": "等待泄压释放",
+            "seconds": 0.8,
+            "milestone": "release_finished_s",
+            "coin_index": 7
+          },
+          {
+            "kind": "move",
+            "label": "释放后竖直抬起验证",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "milestone": "verification_lift_finished_s",
+            "coin_index": 7
+          },
+          {
+            "kind": "wait",
+            "label": "停留供观察和拍摄",
+            "seconds": 0.5,
+            "coin_index": 7
+          },
+          {
+            "kind": "move",
+            "label": "空吸盘反向恢复初始腕角",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": 49.85694885253906
+            },
+            "milestone": "cycle_finished_s",
+            "coin_index": 7
+          }
+        ]
+      },
+      {
+        "coin_index": 8,
+        "pick_z_mm": -64.44528732299804,
+        "source_remaining_before_pick": 3,
+        "destination_count_before_release": 7,
+        "destination_existing_top_z_mm": -56.96496810913086,
+        "release_z_mm": -54.094888305664064,
+        "verification_z_mm": -18.18544692993164,
+        "release_bottom_gap_mm": 1.0,
+        "steps": [
+          {
+            "kind": "move",
+            "label": "空吸盘高位返回A",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 8
+          },
+          {
+            "kind": "move",
+            "label": "下降到下一层取币高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -64.44528732299804,
+              "r": 28.83930206298828
+            },
+            "coin_index": 8
+          },
+          {
+            "kind": "suction",
+            "label": "打开吸盘",
+            "on": true,
+            "milestone": "grip_started_s",
+            "coin_index": 8
+          },
+          {
+            "kind": "wait",
+            "label": "等待吸附",
+            "seconds": 0.6,
+            "coin_index": 8
+          },
+          {
+            "kind": "move",
+            "label": "携币竖直抬升越障高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 8
+          },
+          {
+            "kind": "move",
+            "label": "在高处旋转180度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 8
+          },
+          {
+            "kind": "move",
+            "label": "保持高位越过障碍到B上方",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 8
+          },
+          {
+            "kind": "move",
+            "label": "下降至本层放币高度",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -54.094888305664064,
+              "r": -151.16069793701172
+            },
+            "coin_index": 8
+          },
+          {
+            "kind": "suction",
+            "label": "关闭吸盘释放硬币",
+            "on": false,
+            "coin_index": 8
+          },
+          {
+            "kind": "wait",
+            "label": "等待泄压释放",
+            "seconds": 0.8,
+            "milestone": "release_finished_s",
+            "coin_index": 8
+          },
+          {
+            "kind": "move",
+            "label": "释放后竖直抬起验证",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "milestone": "verification_lift_finished_s",
+            "coin_index": 8
+          },
+          {
+            "kind": "wait",
+            "label": "停留供观察和拍摄",
+            "seconds": 0.5,
+            "coin_index": 8
+          },
+          {
+            "kind": "move",
+            "label": "空吸盘反向恢复初始腕角",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": 49.85694885253906
+            },
+            "milestone": "cycle_finished_s",
+            "coin_index": 8
+          }
+        ]
+      },
+      {
+        "coin_index": 9,
+        "pick_z_mm": -66.31536712646485,
+        "source_remaining_before_pick": 2,
+        "destination_count_before_release": 8,
+        "destination_existing_top_z_mm": -55.094888305664064,
+        "release_z_mm": -52.22480850219726,
+        "verification_z_mm": -18.18544692993164,
+        "release_bottom_gap_mm": 1.0,
+        "steps": [
+          {
+            "kind": "move",
+            "label": "空吸盘高位返回A",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 9
+          },
+          {
+            "kind": "move",
+            "label": "下降到下一层取币高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -66.31536712646485,
+              "r": 28.83930206298828
+            },
+            "coin_index": 9
+          },
+          {
+            "kind": "suction",
+            "label": "打开吸盘",
+            "on": true,
+            "milestone": "grip_started_s",
+            "coin_index": 9
+          },
+          {
+            "kind": "wait",
+            "label": "等待吸附",
+            "seconds": 0.6,
+            "coin_index": 9
+          },
+          {
+            "kind": "move",
+            "label": "携币竖直抬升越障高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 9
+          },
+          {
+            "kind": "move",
+            "label": "在高处旋转180度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 9
+          },
+          {
+            "kind": "move",
+            "label": "保持高位越过障碍到B上方",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 9
+          },
+          {
+            "kind": "move",
+            "label": "下降至本层放币高度",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -52.22480850219726,
+              "r": -151.16069793701172
+            },
+            "coin_index": 9
+          },
+          {
+            "kind": "suction",
+            "label": "关闭吸盘释放硬币",
+            "on": false,
+            "coin_index": 9
+          },
+          {
+            "kind": "wait",
+            "label": "等待泄压释放",
+            "seconds": 0.8,
+            "milestone": "release_finished_s",
+            "coin_index": 9
+          },
+          {
+            "kind": "move",
+            "label": "释放后竖直抬起验证",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "milestone": "verification_lift_finished_s",
+            "coin_index": 9
+          },
+          {
+            "kind": "wait",
+            "label": "停留供观察和拍摄",
+            "seconds": 0.5,
+            "coin_index": 9
+          },
+          {
+            "kind": "move",
+            "label": "空吸盘反向恢复初始腕角",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": 49.85694885253906
+            },
+            "milestone": "cycle_finished_s",
+            "coin_index": 9
+          }
+        ]
+      },
+      {
+        "coin_index": 10,
+        "pick_z_mm": -68.18544692993164,
+        "source_remaining_before_pick": 1,
+        "destination_count_before_release": 9,
+        "destination_existing_top_z_mm": -53.22480850219726,
+        "release_z_mm": -50.35472869873047,
+        "verification_z_mm": -18.18544692993164,
+        "release_bottom_gap_mm": 1.0,
+        "steps": [
+          {
+            "kind": "move",
+            "label": "空吸盘高位返回A",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 10
+          },
+          {
+            "kind": "move",
+            "label": "下降到下一层取币高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -68.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 10
+          },
+          {
+            "kind": "suction",
+            "label": "打开吸盘",
+            "on": true,
+            "milestone": "grip_started_s",
+            "coin_index": 10
+          },
+          {
+            "kind": "wait",
+            "label": "等待吸附",
+            "seconds": 0.6,
+            "coin_index": 10
+          },
+          {
+            "kind": "move",
+            "label": "携币竖直抬升越障高度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": 28.83930206298828
+            },
+            "coin_index": 10
+          },
+          {
+            "kind": "move",
+            "label": "在高处旋转180度",
+            "point": {
+              "x": -17.11852264404297,
+              "y": -240.19921875,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 10
+          },
+          {
+            "kind": "move",
+            "label": "保持高位越过障碍到B上方",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "coin_index": 10
+          },
+          {
+            "kind": "move",
+            "label": "下降至本层放币高度",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -50.35472869873047,
+              "r": -151.16069793701172
+            },
+            "coin_index": 10
+          },
+          {
+            "kind": "suction",
+            "label": "关闭吸盘释放硬币",
+            "on": false,
+            "coin_index": 10
+          },
+          {
+            "kind": "wait",
+            "label": "等待泄压释放",
+            "seconds": 0.8,
+            "milestone": "release_finished_s",
+            "coin_index": 10
+          },
+          {
+            "kind": "move",
+            "label": "释放后竖直抬起验证",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": -151.16069793701172
+            },
+            "milestone": "verification_lift_finished_s",
+            "coin_index": 10
+          },
+          {
+            "kind": "wait",
+            "label": "停留供观察和拍摄",
+            "seconds": 2.0,
+            "coin_index": 10
+          },
+          {
+            "kind": "move",
+            "label": "空吸盘反向恢复初始腕角",
+            "point": {
+              "x": 72.53417205810547,
+              "y": -238.12271118164062,
+              "z": -18.18544692993164,
+              "r": 49.85694885253906
+            },
+            "milestone": "cycle_finished_s",
+            "coin_index": 10
+          }
+        ]
+      }
+    ],
+    "rotation": {
+      "delta_deg": -180.0,
+      "direction": "cw",
+      "direction_cn": "顺时针",
+      "target_r_deg": -151.16069793701172,
+      "j4_range_deg": [
+        -78.10187280001969,
+        122.9157664949675
+      ],
+      "feasible": true
+    },
+    "rotation_candidates": [
+      {
+        "delta_deg": 180.0,
+        "direction": "ccw",
+        "direction_cn": "逆时针",
+        "target_r_deg": 208.83930206298828,
+        "j4_range_deg": [
+          122.9157664949675,
+          302.9157664949675
+        ],
+        "feasible": false
+      },
+      {
+        "delta_deg": -180.0,
+        "direction": "cw",
+        "direction_cn": "顺时针",
+        "target_r_deg": -151.16069793701172,
+        "j4_range_deg": [
+          -78.10187280001969,
+          122.9157664949675
+        ],
+        "feasible": true
+      }
+    ],
+    "empty_return_r_deg": 49.85694885253906,
+    "empty_return_delta_r_deg": 201.01764678955078,
+    "motion_mode": "MOVL_XYZ",
+    "tool_offset": {
+      "x": 59.70000076293945,
+      "y": 0.0,
+      "z": 0.0
+    },
+    "steps": [
+      {
+        "kind": "suction",
+        "label": "打开吸盘",
+        "on": true,
+        "milestone": "grip_started_s",
+        "coin_index": 1
+      },
+      {
+        "kind": "wait",
+        "label": "等待吸附",
+        "seconds": 0.6,
+        "coin_index": 1
+      },
+      {
+        "kind": "move",
+        "label": "携币竖直抬升越障高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 1
+      },
+      {
+        "kind": "move",
+        "label": "在高处旋转180度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 1
+      },
+      {
+        "kind": "move",
+        "label": "保持高位越过障碍到B上方",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 1
+      },
+      {
+        "kind": "move",
+        "label": "下降至本层放币高度",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -67.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 1
+      },
+      {
+        "kind": "suction",
+        "label": "关闭吸盘释放硬币",
+        "on": false,
+        "coin_index": 1
+      },
+      {
+        "kind": "wait",
+        "label": "等待泄压释放",
+        "seconds": 0.8,
+        "milestone": "release_finished_s",
+        "coin_index": 1
+      },
+      {
+        "kind": "move",
+        "label": "释放后竖直抬起验证",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "milestone": "verification_lift_finished_s",
+        "coin_index": 1
+      },
+      {
+        "kind": "wait",
+        "label": "停留供观察和拍摄",
+        "seconds": 0.5,
+        "coin_index": 1
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘反向恢复初始腕角",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": 49.85694885253906
+        },
+        "milestone": "cycle_finished_s",
+        "coin_index": 1
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘高位返回A",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 2
+      },
+      {
+        "kind": "move",
+        "label": "下降到下一层取币高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -53.22480850219726,
+          "r": 28.83930206298828
+        },
+        "coin_index": 2
+      },
+      {
+        "kind": "suction",
+        "label": "打开吸盘",
+        "on": true,
+        "milestone": "grip_started_s",
+        "coin_index": 2
+      },
+      {
+        "kind": "wait",
+        "label": "等待吸附",
+        "seconds": 0.6,
+        "coin_index": 2
+      },
+      {
+        "kind": "move",
+        "label": "携币竖直抬升越障高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 2
+      },
+      {
+        "kind": "move",
+        "label": "在高处旋转180度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 2
+      },
+      {
+        "kind": "move",
+        "label": "保持高位越过障碍到B上方",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 2
+      },
+      {
+        "kind": "move",
+        "label": "下降至本层放币高度",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -65.31536712646485,
+          "r": -151.16069793701172
+        },
+        "coin_index": 2
+      },
+      {
+        "kind": "suction",
+        "label": "关闭吸盘释放硬币",
+        "on": false,
+        "coin_index": 2
+      },
+      {
+        "kind": "wait",
+        "label": "等待泄压释放",
+        "seconds": 0.8,
+        "milestone": "release_finished_s",
+        "coin_index": 2
+      },
+      {
+        "kind": "move",
+        "label": "释放后竖直抬起验证",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "milestone": "verification_lift_finished_s",
+        "coin_index": 2
+      },
+      {
+        "kind": "wait",
+        "label": "停留供观察和拍摄",
+        "seconds": 0.5,
+        "coin_index": 2
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘反向恢复初始腕角",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": 49.85694885253906
+        },
+        "milestone": "cycle_finished_s",
+        "coin_index": 2
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘高位返回A",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 3
+      },
+      {
+        "kind": "move",
+        "label": "下降到下一层取币高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -55.094888305664064,
+          "r": 28.83930206298828
+        },
+        "coin_index": 3
+      },
+      {
+        "kind": "suction",
+        "label": "打开吸盘",
+        "on": true,
+        "milestone": "grip_started_s",
+        "coin_index": 3
+      },
+      {
+        "kind": "wait",
+        "label": "等待吸附",
+        "seconds": 0.6,
+        "coin_index": 3
+      },
+      {
+        "kind": "move",
+        "label": "携币竖直抬升越障高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 3
+      },
+      {
+        "kind": "move",
+        "label": "在高处旋转180度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 3
+      },
+      {
+        "kind": "move",
+        "label": "保持高位越过障碍到B上方",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 3
+      },
+      {
+        "kind": "move",
+        "label": "下降至本层放币高度",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -63.44528732299804,
+          "r": -151.16069793701172
+        },
+        "coin_index": 3
+      },
+      {
+        "kind": "suction",
+        "label": "关闭吸盘释放硬币",
+        "on": false,
+        "coin_index": 3
+      },
+      {
+        "kind": "wait",
+        "label": "等待泄压释放",
+        "seconds": 0.8,
+        "milestone": "release_finished_s",
+        "coin_index": 3
+      },
+      {
+        "kind": "move",
+        "label": "释放后竖直抬起验证",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "milestone": "verification_lift_finished_s",
+        "coin_index": 3
+      },
+      {
+        "kind": "wait",
+        "label": "停留供观察和拍摄",
+        "seconds": 0.5,
+        "coin_index": 3
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘反向恢复初始腕角",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": 49.85694885253906
+        },
+        "milestone": "cycle_finished_s",
+        "coin_index": 3
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘高位返回A",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 4
+      },
+      {
+        "kind": "move",
+        "label": "下降到下一层取币高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -56.96496810913086,
+          "r": 28.83930206298828
+        },
+        "coin_index": 4
+      },
+      {
+        "kind": "suction",
+        "label": "打开吸盘",
+        "on": true,
+        "milestone": "grip_started_s",
+        "coin_index": 4
+      },
+      {
+        "kind": "wait",
+        "label": "等待吸附",
+        "seconds": 0.6,
+        "coin_index": 4
+      },
+      {
+        "kind": "move",
+        "label": "携币竖直抬升越障高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 4
+      },
+      {
+        "kind": "move",
+        "label": "在高处旋转180度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 4
+      },
+      {
+        "kind": "move",
+        "label": "保持高位越过障碍到B上方",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 4
+      },
+      {
+        "kind": "move",
+        "label": "下降至本层放币高度",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -61.57520751953125,
+          "r": -151.16069793701172
+        },
+        "coin_index": 4
+      },
+      {
+        "kind": "suction",
+        "label": "关闭吸盘释放硬币",
+        "on": false,
+        "coin_index": 4
+      },
+      {
+        "kind": "wait",
+        "label": "等待泄压释放",
+        "seconds": 0.8,
+        "milestone": "release_finished_s",
+        "coin_index": 4
+      },
+      {
+        "kind": "move",
+        "label": "释放后竖直抬起验证",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "milestone": "verification_lift_finished_s",
+        "coin_index": 4
+      },
+      {
+        "kind": "wait",
+        "label": "停留供观察和拍摄",
+        "seconds": 0.5,
+        "coin_index": 4
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘反向恢复初始腕角",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": 49.85694885253906
+        },
+        "milestone": "cycle_finished_s",
+        "coin_index": 4
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘高位返回A",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 5
+      },
+      {
+        "kind": "move",
+        "label": "下降到下一层取币高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -58.83504791259766,
+          "r": 28.83930206298828
+        },
+        "coin_index": 5
+      },
+      {
+        "kind": "suction",
+        "label": "打开吸盘",
+        "on": true,
+        "milestone": "grip_started_s",
+        "coin_index": 5
+      },
+      {
+        "kind": "wait",
+        "label": "等待吸附",
+        "seconds": 0.6,
+        "coin_index": 5
+      },
+      {
+        "kind": "move",
+        "label": "携币竖直抬升越障高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 5
+      },
+      {
+        "kind": "move",
+        "label": "在高处旋转180度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 5
+      },
+      {
+        "kind": "move",
+        "label": "保持高位越过障碍到B上方",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 5
+      },
+      {
+        "kind": "move",
+        "label": "下降至本层放币高度",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -59.70512771606445,
+          "r": -151.16069793701172
+        },
+        "coin_index": 5
+      },
+      {
+        "kind": "suction",
+        "label": "关闭吸盘释放硬币",
+        "on": false,
+        "coin_index": 5
+      },
+      {
+        "kind": "wait",
+        "label": "等待泄压释放",
+        "seconds": 0.8,
+        "milestone": "release_finished_s",
+        "coin_index": 5
+      },
+      {
+        "kind": "move",
+        "label": "释放后竖直抬起验证",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "milestone": "verification_lift_finished_s",
+        "coin_index": 5
+      },
+      {
+        "kind": "wait",
+        "label": "停留供观察和拍摄",
+        "seconds": 0.5,
+        "coin_index": 5
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘反向恢复初始腕角",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": 49.85694885253906
+        },
+        "milestone": "cycle_finished_s",
+        "coin_index": 5
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘高位返回A",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 6
+      },
+      {
+        "kind": "move",
+        "label": "下降到下一层取币高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -60.70512771606445,
+          "r": 28.83930206298828
+        },
+        "coin_index": 6
+      },
+      {
+        "kind": "suction",
+        "label": "打开吸盘",
+        "on": true,
+        "milestone": "grip_started_s",
+        "coin_index": 6
+      },
+      {
+        "kind": "wait",
+        "label": "等待吸附",
+        "seconds": 0.6,
+        "coin_index": 6
+      },
+      {
+        "kind": "move",
+        "label": "携币竖直抬升越障高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 6
+      },
+      {
+        "kind": "move",
+        "label": "在高处旋转180度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 6
+      },
+      {
+        "kind": "move",
+        "label": "保持高位越过障碍到B上方",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 6
+      },
+      {
+        "kind": "move",
+        "label": "下降至本层放币高度",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -57.83504791259766,
+          "r": -151.16069793701172
+        },
+        "coin_index": 6
+      },
+      {
+        "kind": "suction",
+        "label": "关闭吸盘释放硬币",
+        "on": false,
+        "coin_index": 6
+      },
+      {
+        "kind": "wait",
+        "label": "等待泄压释放",
+        "seconds": 0.8,
+        "milestone": "release_finished_s",
+        "coin_index": 6
+      },
+      {
+        "kind": "move",
+        "label": "释放后竖直抬起验证",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "milestone": "verification_lift_finished_s",
+        "coin_index": 6
+      },
+      {
+        "kind": "wait",
+        "label": "停留供观察和拍摄",
+        "seconds": 0.5,
+        "coin_index": 6
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘反向恢复初始腕角",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": 49.85694885253906
+        },
+        "milestone": "cycle_finished_s",
+        "coin_index": 6
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘高位返回A",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 7
+      },
+      {
+        "kind": "move",
+        "label": "下降到下一层取币高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -62.57520751953125,
+          "r": 28.83930206298828
+        },
+        "coin_index": 7
+      },
+      {
+        "kind": "suction",
+        "label": "打开吸盘",
+        "on": true,
+        "milestone": "grip_started_s",
+        "coin_index": 7
+      },
+      {
+        "kind": "wait",
+        "label": "等待吸附",
+        "seconds": 0.6,
+        "coin_index": 7
+      },
+      {
+        "kind": "move",
+        "label": "携币竖直抬升越障高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 7
+      },
+      {
+        "kind": "move",
+        "label": "在高处旋转180度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 7
+      },
+      {
+        "kind": "move",
+        "label": "保持高位越过障碍到B上方",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 7
+      },
+      {
+        "kind": "move",
+        "label": "下降至本层放币高度",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -55.96496810913086,
+          "r": -151.16069793701172
+        },
+        "coin_index": 7
+      },
+      {
+        "kind": "suction",
+        "label": "关闭吸盘释放硬币",
+        "on": false,
+        "coin_index": 7
+      },
+      {
+        "kind": "wait",
+        "label": "等待泄压释放",
+        "seconds": 0.8,
+        "milestone": "release_finished_s",
+        "coin_index": 7
+      },
+      {
+        "kind": "move",
+        "label": "释放后竖直抬起验证",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "milestone": "verification_lift_finished_s",
+        "coin_index": 7
+      },
+      {
+        "kind": "wait",
+        "label": "停留供观察和拍摄",
+        "seconds": 0.5,
+        "coin_index": 7
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘反向恢复初始腕角",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": 49.85694885253906
+        },
+        "milestone": "cycle_finished_s",
+        "coin_index": 7
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘高位返回A",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 8
+      },
+      {
+        "kind": "move",
+        "label": "下降到下一层取币高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -64.44528732299804,
+          "r": 28.83930206298828
+        },
+        "coin_index": 8
+      },
+      {
+        "kind": "suction",
+        "label": "打开吸盘",
+        "on": true,
+        "milestone": "grip_started_s",
+        "coin_index": 8
+      },
+      {
+        "kind": "wait",
+        "label": "等待吸附",
+        "seconds": 0.6,
+        "coin_index": 8
+      },
+      {
+        "kind": "move",
+        "label": "携币竖直抬升越障高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 8
+      },
+      {
+        "kind": "move",
+        "label": "在高处旋转180度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 8
+      },
+      {
+        "kind": "move",
+        "label": "保持高位越过障碍到B上方",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 8
+      },
+      {
+        "kind": "move",
+        "label": "下降至本层放币高度",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -54.094888305664064,
+          "r": -151.16069793701172
+        },
+        "coin_index": 8
+      },
+      {
+        "kind": "suction",
+        "label": "关闭吸盘释放硬币",
+        "on": false,
+        "coin_index": 8
+      },
+      {
+        "kind": "wait",
+        "label": "等待泄压释放",
+        "seconds": 0.8,
+        "milestone": "release_finished_s",
+        "coin_index": 8
+      },
+      {
+        "kind": "move",
+        "label": "释放后竖直抬起验证",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "milestone": "verification_lift_finished_s",
+        "coin_index": 8
+      },
+      {
+        "kind": "wait",
+        "label": "停留供观察和拍摄",
+        "seconds": 0.5,
+        "coin_index": 8
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘反向恢复初始腕角",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": 49.85694885253906
+        },
+        "milestone": "cycle_finished_s",
+        "coin_index": 8
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘高位返回A",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 9
+      },
+      {
+        "kind": "move",
+        "label": "下降到下一层取币高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -66.31536712646485,
+          "r": 28.83930206298828
+        },
+        "coin_index": 9
+      },
+      {
+        "kind": "suction",
+        "label": "打开吸盘",
+        "on": true,
+        "milestone": "grip_started_s",
+        "coin_index": 9
+      },
+      {
+        "kind": "wait",
+        "label": "等待吸附",
+        "seconds": 0.6,
+        "coin_index": 9
+      },
+      {
+        "kind": "move",
+        "label": "携币竖直抬升越障高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 9
+      },
+      {
+        "kind": "move",
+        "label": "在高处旋转180度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 9
+      },
+      {
+        "kind": "move",
+        "label": "保持高位越过障碍到B上方",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 9
+      },
+      {
+        "kind": "move",
+        "label": "下降至本层放币高度",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -52.22480850219726,
+          "r": -151.16069793701172
+        },
+        "coin_index": 9
+      },
+      {
+        "kind": "suction",
+        "label": "关闭吸盘释放硬币",
+        "on": false,
+        "coin_index": 9
+      },
+      {
+        "kind": "wait",
+        "label": "等待泄压释放",
+        "seconds": 0.8,
+        "milestone": "release_finished_s",
+        "coin_index": 9
+      },
+      {
+        "kind": "move",
+        "label": "释放后竖直抬起验证",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "milestone": "verification_lift_finished_s",
+        "coin_index": 9
+      },
+      {
+        "kind": "wait",
+        "label": "停留供观察和拍摄",
+        "seconds": 0.5,
+        "coin_index": 9
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘反向恢复初始腕角",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": 49.85694885253906
+        },
+        "milestone": "cycle_finished_s",
+        "coin_index": 9
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘高位返回A",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 10
+      },
+      {
+        "kind": "move",
+        "label": "下降到下一层取币高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -68.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 10
+      },
+      {
+        "kind": "suction",
+        "label": "打开吸盘",
+        "on": true,
+        "milestone": "grip_started_s",
+        "coin_index": 10
+      },
+      {
+        "kind": "wait",
+        "label": "等待吸附",
+        "seconds": 0.6,
+        "coin_index": 10
+      },
+      {
+        "kind": "move",
+        "label": "携币竖直抬升越障高度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": 28.83930206298828
+        },
+        "coin_index": 10
+      },
+      {
+        "kind": "move",
+        "label": "在高处旋转180度",
+        "point": {
+          "x": -17.11852264404297,
+          "y": -240.19921875,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 10
+      },
+      {
+        "kind": "move",
+        "label": "保持高位越过障碍到B上方",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "coin_index": 10
+      },
+      {
+        "kind": "move",
+        "label": "下降至本层放币高度",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -50.35472869873047,
+          "r": -151.16069793701172
+        },
+        "coin_index": 10
+      },
+      {
+        "kind": "suction",
+        "label": "关闭吸盘释放硬币",
+        "on": false,
+        "coin_index": 10
+      },
+      {
+        "kind": "wait",
+        "label": "等待泄压释放",
+        "seconds": 0.8,
+        "milestone": "release_finished_s",
+        "coin_index": 10
+      },
+      {
+        "kind": "move",
+        "label": "释放后竖直抬起验证",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": -151.16069793701172
+        },
+        "milestone": "verification_lift_finished_s",
+        "coin_index": 10
+      },
+      {
+        "kind": "wait",
+        "label": "停留供观察和拍摄",
+        "seconds": 2.0,
+        "coin_index": 10
+      },
+      {
+        "kind": "move",
+        "label": "空吸盘反向恢复初始腕角",
+        "point": {
+          "x": 72.53417205810547,
+          "y": -238.12271118164062,
+          "z": -18.18544692993164,
+          "r": 49.85694885253906
+        },
+        "milestone": "cycle_finished_s",
+        "coin_index": 10
+      }
+    ]
+  },
+  "motion_profile": {
+    "joint_velocity_deg_s": 200.0,
+    "joint_acceleration_deg_s2": 200.0,
+    "xyz_velocity_mm_s": 200.0,
+    "xyz_acceleration_mm_s2": 200.0,
+    "r_velocity_deg_s": 200.0,
+    "r_acceleration_deg_s2": 200.0,
+    "velocity_ratio_percent": 100.0,
+    "acceleration_ratio_percent": 100.0,
+    "reference": "D:/Software/DobotStudio/config/ststore/Example_PTP.py:4-7，本机官方示例；不把当前绘图低速参数当作默认参数"
+  },
+  "coin_count": 10,
+  "coins_completed": 0,
+  "coins": [],
+  "events": [],
+  "samples": [],
+  "visual_release_confirmation": "pending human observation",
+  "initial_pose": {
+    "x": -11.504560470581055,
+    "y": -248.83946228027344,
+    "z": -51.35426330566406,
+    "r": -167.14892578125,
+    "j1": -92.64705657958984,
+    "j2": 56.696353912353516,
+    "j3": 58.60566711425781,
+    "j4": -74.50187683105469
+  },
+  "initial_suction": {
+    "enabled": true,
+    "on": false
+  },
+  "original_parameters": {
+    "joint_velocity_deg_s": [
+      200.0,
+      200.0,
+      200.0,
+      200.0
+    ],
+    "joint_acceleration_deg_s2": [
+      200.0,
+      200.0,
+      200.0,
+      200.0
+    ],
+    "xyz_velocity_mm_s": 200.0,
+    "xyz_acceleration_mm_s2": 200.0,
+    "r_velocity_deg_s": 200.0,
+    "r_acceleration_deg_s2": 200.0,
+    "velocity_ratio_percent": 100.0,
+    "acceleration_ratio_percent": 100.0
+  },
+  "error": "ValueError: 请拖回A附近：允许XY距离15.0mm、Z偏差±10.0mm、R偏差±15.0°；当前偏差{'xy_mm': 10.303901180984473, 'z_mm': 0.00046539306640625, 'r_deg': -195.98822784423828}",
+  "sampled_peak_tcp_velocity_mm_s": 0,
+  "sampled_peak_tcp_acceleration_mm_s2": 0
+}

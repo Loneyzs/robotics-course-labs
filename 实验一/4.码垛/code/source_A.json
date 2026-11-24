@@ -1,17 +1,18 @@
 {
-  "timestamp": "2026-11-10T11:02:20.887313+00:00",
+  "timestamp": "2026-11-17T09:57:48.015136+00:00",
   "experiment": "4_coin_transfer",
+  "coin_count": 10,
   "point": "source_A",
-  "port": "COM7",
+  "port": "COM8",
   "pose": {
-    "x": 80.59455108642578,
-    "y": -166.25999450683594,
-    "z": -67.09537506103516,
-    "r": -148.1063232421875,
-    "j1": -64.1382064819336,
-    "j2": 54.1473388671875,
-    "j3": 83.89115905761719,
-    "j4": -83.96812438964844
+    "x": 242.5127716064453,
+    "y": 31.3197021484375,
+    "z": -50.975486755371094,
+    "r": 30.295183181762695,
+    "j1": 7.358823299407959,
+    "j2": 55.564483642578125,
+    "j3": 60.00728225708008,
+    "j4": 22.936359405517578
   },
   "tool_offset": {
     "x": 59.70000076293945,
@@ -42,6 +43,8 @@
     "suction_on": false
   },
   "motion_sent": false,
-  "note": "User confirmed: suction cup contacts the upper face of a single coin.",
-  "contact_reference": "User confirmed: suction cup contacts the upper face of a single coin."
+  "contact_reference": "User confirmed: suction cup contacts the top face of the uppermost coin in the initial 10-coin stack.",
+  "note": "User repositioned at A following power-off/reset; updated source reference, destination recapture pending.",
+  "destination_recapture_pending": false,
+  "destination_timestamp": "2026-11-17T09:59:45.789273+00:00"
 }

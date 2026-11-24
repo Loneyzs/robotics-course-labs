@@ -1,0 +1,31 @@
+{
+  "port": "COM7",
+  "coin_count": 1,
+  "start_mode": "near_A_auto_align",
+  "start_tolerance": {
+    "xy_mm": 15.0,
+    "z_mm": 10.0,
+    "r_deg": 15.0
+  },
+  "source_reference": "吸盘轻触单枚硬币上表面",
+  "destination_reference": "空吸盘轻触桌面",
+  "obstacle_height_mm": 30.0,
+  "clearance_mm": 20.0,
+  "release_offset_mm": 5.0,
+  "verification_lift_mm": 20.0,
+  "verification_hold_s": 2.0,
+  "grip_wait_s": 0.6,
+  "release_wait_s": 0.6,
+  "rotation_direction": "auto",
+  "motion_profile": {
+    "joint_velocity_deg_s": 200.0,
+    "joint_acceleration_deg_s2": 200.0,
+    "xyz_velocity_mm_s": 200.0,
+    "xyz_acceleration_mm_s2": 200.0,
+    "r_velocity_deg_s": 200.0,
+    "r_acceleration_deg_s2": 200.0,
+    "velocity_ratio_percent": 100.0,
+    "acceleration_ratio_percent": 100.0,
+    "reference": "D:/Software/DobotStudio/config/ststore/Example_PTP.py:4-7，本机官方示例；不把当前绘图低速参数当作默认参数"
+  }
+}

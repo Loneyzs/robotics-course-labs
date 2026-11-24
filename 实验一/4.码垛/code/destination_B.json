@@ -1,17 +1,18 @@
 {
-  "timestamp": "2026-11-10T11:06:03.404981+00:00",
+  "timestamp": "2026-11-17T09:59:45.789273+00:00",
   "experiment": "4_coin_transfer",
+  "coin_count": 10,
   "point": "destination_B",
-  "port": "COM7",
+  "port": "COM8",
   "pose": {
-    "x": 123.99547576904297,
-    "y": -263.8197021484375,
-    "z": -67.97476196289062,
-    "r": -148.7945556640625,
-    "j1": -64.8264389038086,
-    "j2": 73.78116607666016,
-    "j3": 45.965354919433594,
-    "j4": -83.96812438964844
+    "x": 218.6612548828125,
+    "y": 111.41349792480469,
+    "z": -70.49032592773438,
+    "r": 49.93635940551758,
+    "j1": 27.0,
+    "j2": 63.05330276489258,
+    "j3": 63.59778594970703,
+    "j4": 22.936359405517578
   },
   "tool_offset": {
     "x": 59.70000076293945,
@@ -36,7 +37,11 @@
     0,
     0
   ],
+  "suction_state": {
+    "read_code": 0,
+    "control_enabled": false,
+    "suction_on": false
+  },
   "motion_sent": false,
-  "note": "User confirmed: empty suction cup contacts the destination tabletop; latest non-limit destination.",
-  "contact_reference": "User confirmed: empty suction cup contacts the destination tabletop; latest non-limit destination."
+  "contact_reference": "Empty destination tabletop contact, recaptured after power reset; paired with current source_A."
 }

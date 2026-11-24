@@ -1,4 +1,4 @@
-"""实验四：单枚硬币取放、越障、旋转 180°、放币后抬起。
+"""实验四：逐枚连续码垛、越障、旋转 180°、放币后抬起。
 
 默认只生成计划和预览，不连接机械臂。
   python "4.码垛/code/coin_demo.py" plan
@@ -66,6 +66,7 @@ def verify_applied_parameters(profile, applied):
 def start_alignment(current, plan, config):
     """允许用户拖回 A 附近，吸币前先抬升并对齐准确的取币位置。"""
     a = plan["source"]
+    pickup_r = plan.get("pickup_r_deg", a["r"])
     if not all(math.isfinite(current[k]) for k in ("x", "y", "z", "r")):
         raise ValueError("当前坐标无效")
     deviation = {"xy_mm": math.hypot(current["x"] - a["x"], current["y"] - a["y"]),
@@ -75,14 +76,15 @@ def start_alignment(current, plan, config):
             or abs(deviation["r_deg"]) > allowed["r_deg"]):
         raise ValueError(f"请拖回A附近：允许XY距离{allowed['xy_mm']}mm、Z偏差±{allowed['z_mm']}mm、"
                          f"R偏差±{allowed['r_deg']}°；当前偏差{deviation}")
-    if all(abs(current[k] - a[k]) <= 0.5 for k in ("x", "y", "z", "r")):
+    if (all(abs(current[k] - a[k]) <= 0.5 for k in ("x", "y", "z"))
+            and abs(current["r"] - pickup_r) <= 0.5):
         return deviation, []
     high = max(current["z"], plan["travel_z_mm"])
     def move(label, x, y, z, r):
         return {"kind": "move", "label": label, "point": dict(x=x, y=y, z=z, r=r)}
     steps = [move("起点校正：先竖直抬升", current["x"], current["y"], high, current["r"]),
-             move("起点校正：高位对准A和取币姿态", a["x"], a["y"], high, a["r"]),
-             move("起点校正：竖直下降到A取币高度", a["x"], a["y"], a["z"], a["r"])]
+             move("起点校正：高位对准A和取币姿态", a["x"], a["y"], high, pickup_r),
+             move("起点校正：竖直下降到A取币高度", a["x"], a["y"], a["z"], pickup_r)]
     return deviation, steps
 
 
@@ -110,19 +112,47 @@ def choose_rotation(source_r, source_xy, target_xy, direction="auto", wrist_limi
     return allowed[0], candidates
 
 
+def choose_pickup_orientation(a, b, direction):
+    """先尝试原腕角；需要时在吸币前预转空吸盘，确保能完整翻转180°。"""
+    if direction not in ("auto", "ccw", "cw"):
+        raise ValueError("旋转方向须为 auto / ccw / cw")
+    xy_a, xy_b = (a["x"], a["y"]), (b["x"], b["y"])
+    try:
+        chosen, candidates = choose_rotation(a["r"], xy_a, xy_b, direction)
+        return chosen, candidates, a["r"], a["j4"]
+    except ValueError:
+        options = []
+        for wrist in (90.0, -90.0):
+            pickup_r = a["j1"] + wrist
+            try:
+                chosen, candidates = choose_rotation(pickup_r, xy_a, xy_b, direction)
+            except ValueError:
+                continue
+            options.append((abs(wrist - a["j4"]), chosen, candidates, pickup_r, wrist))
+        if not options:
+            raise ValueError("空吸盘预转后仍无法在腕部范围内完成180°旋转，请重新选择A/B")
+        _, chosen, candidates, pickup_r, wrist = min(options, key=lambda item: item[0])
+        return chosen, candidates, pickup_r, wrist
+
+
 def build_plan(source, destination, config):
+    if source.get("destination_recapture_pending"):
+        raise ValueError("复位后的A已更新，需重新采集B后才能运行，避免混用复位前后的坐标")
     a, b = source["pose"], destination["pose"]
     if any(source.get("alarm_bytes", [])) or any(destination.get("alarm_bytes", [])):
         raise ValueError("采点记录存在报警，请重新采集正常位置")
-    if config.get("coin_count") != 1:
-        raise ValueError("当前脚本按单枚演示设计，coin_count 必须为 1")
+    count = config.get("coin_count")
+    if type(count) is not int or not 1 <= count <= 100:
+        raise ValueError("coin_count 须为1～100之间的整数")
+    thickness = config["coin_thickness_mm"]
+    finite_positive(thickness, "硬币厚度", 5)
     for name in ("xy_mm", "z_mm", "r_deg"):
         finite_positive(config["start_tolerance"][name], f"起点容差{name}", 50)
     for item in ("obstacle_height_mm", "clearance_mm", "release_offset_mm", "verification_lift_mm"):
         finite_positive(config[item], item, 100)
     if config["clearance_mm"] < 10:
         raise ValueError("越障余量至少保留 10 mm")
-    for name in ("grip_wait_s", "release_wait_s", "verification_hold_s"):
+    for name in ("grip_wait_s", "release_wait_s", "verification_hold_s", "final_hold_s"):
         finite_positive(config[name], name, 10)
     profile = config["motion_profile"]
     for key in ("joint_velocity_deg_s", "joint_acceleration_deg_s2", "xyz_velocity_mm_s",
@@ -140,39 +170,71 @@ def build_plan(source, destination, config):
             raise ValueError("采点基座角与 XY 不一致，不能推断腕部角")
         if abs(p["r"] - p["j1"] - p["j4"]) > 1:
             raise ValueError("采点不满足 R=J1+J4，请核对工具和坐标系")
-    rotation, candidates = choose_rotation(a["r"], (a["x"], a["y"]),
-                                           (b["x"], b["y"]), config["rotation_direction"])
-    high = max(a["z"], b["z"]) + config["obstacle_height_mm"] + config["clearance_mm"]
-    release = b["z"] + config["release_offset_mm"]
-    verify = release + config["verification_lift_mm"]
+    rotation, candidates, pickup_r, pickup_j4 = choose_pickup_orientation(a, b, config["rotation_direction"])
+    # Z 指吸盘接触面；携币时硬币底面还低一个币厚。
+    source_table = a["z"] - count * thickness
+    destination_top = b["z"] + count * thickness
+    obstacle_top = b["z"] + config["obstacle_height_mm"]
+    high = max(a["z"], destination_top, obstacle_top) + config["clearance_mm"] + thickness
     reset_r = a["j4"] + b["j1"]
-    # A 为硬币上表面，B 为空吸盘触桌面。B 上方释放，避免未知币厚引起下压。
-    ra, rb = a["r"], rotation["target_r_deg"]
+    # A 是初始整叠最上层接触位，B 是空桌面接触位。
+    ra, rb = pickup_r, rotation["target_r_deg"]
 
     def move(label, x, y, z, r):
         return {"kind": "move", "label": label, "point": dict(x=x, y=y, z=z, r=r)}
 
-    steps = [
-        {"kind": "suction", "label": "打开吸盘", "on": True},
-        {"kind": "wait", "label": "等待吸附", "seconds": config["grip_wait_s"]},
-        move("携币竖直抬升越障高度", a["x"], a["y"], high, ra),
-        move("在高处旋转180度", a["x"], a["y"], high, rb),
-        move("保持高位越过障碍到B上方", b["x"], b["y"], high, rb),
-        move("下降至B释放高度", b["x"], b["y"], release, rb),
-        {"kind": "suction", "label": "关闭吸盘释放硬币", "on": False},
-        {"kind": "wait", "label": "等待泄压释放", "seconds": config["release_wait_s"]},
-        move("释放后竖直抬起验证", b["x"], b["y"], verify, rb),
-        {"kind": "wait", "label": "停留供观察和拍摄", "seconds": config["verification_hold_s"]},
-        move("空吸盘反向恢复初始腕角", b["x"], b["y"], verify, reset_r),
-    ]
-    return {"coin_count": 1, "source": a, "destination": b,
+    steps, cycles = [], []
+    for i in range(count):
+        pick = a["z"] - i * thickness
+        # B上已有i枚，吸盘下方另持1枚：底面在已有堆顶上方gap处释放。
+        release = b["z"] + (i + 1) * thickness + config["release_offset_mm"]
+        verify = max(high, release + config["verification_lift_mm"])
+        cycle_steps = []
+        if i:
+            cycle_steps += [move("空吸盘高位返回A", a["x"], a["y"], high, ra),
+                            move("下降到下一层取币高度", a["x"], a["y"], pick, ra)]
+        cycle_steps += [
+            {"kind": "suction", "label": "打开吸盘", "on": True, "milestone": "grip_started_s"},
+            {"kind": "wait", "label": "等待吸附", "seconds": config["grip_wait_s"]},
+            move("携币竖直抬升越障高度", a["x"], a["y"], high, ra),
+            move("在高处旋转180度", a["x"], a["y"], high, rb),
+            move("保持高位越过障碍到B上方", b["x"], b["y"], high, rb),
+            move("下降至本层放币高度", b["x"], b["y"], release, rb),
+            {"kind": "suction", "label": "关闭吸盘释放硬币", "on": False},
+            {"kind": "wait", "label": "等待泄压释放", "seconds": config["release_wait_s"],
+             "milestone": "release_finished_s"},
+            move("释放后竖直抬起验证", b["x"], b["y"], verify, rb),
+            {"kind": "wait", "label": "停留供观察和拍摄",
+             "seconds": config["final_hold_s"] if i == count - 1 else config["verification_hold_s"]},
+            move("空吸盘反向恢复初始腕角", b["x"], b["y"], verify,
+                 reset_r if i == count - 1 else pickup_j4 + b["j1"]),
+        ]
+        cycle_steps[-3]["milestone"] = "verification_lift_finished_s"
+        cycle_steps[-1]["milestone"] = "cycle_finished_s"
+        for step in cycle_steps:
+            step["coin_index"] = i + 1
+        cycles.append({"coin_index": i + 1, "pick_z_mm": pick,
+                       "source_remaining_before_pick": count - i,
+                       "destination_count_before_release": i,
+                       "destination_existing_top_z_mm": b["z"] + i * thickness,
+                       "release_z_mm": release, "verification_z_mm": verify,
+                       "release_bottom_gap_mm": config["release_offset_mm"],
+                       "steps": cycle_steps})
+        steps.extend(cycle_steps)
+    return {"coin_count": count, "coin_thickness_mm": thickness,
+            "thickness_source": config["thickness_source"],
+            "source_table_z_estimate_mm": source_table, "destination_full_stack_top_z_mm": destination_top,
+            "source": a, "destination": b,
             "start_tolerance": config["start_tolerance"],
             "start_alignment": "near A -> lift -> align above recorded A -> descend before suction",
             "distance_xy_mm": math.hypot(b["x"] - a["x"], b["y"] - a["y"]),
             "obstacle_height_mm": config["obstacle_height_mm"], "obstacle_height_source": "user estimate",
             "clearance_mm": config["clearance_mm"], "travel_z_mm": high,
-            "release_z_mm": release, "verification_z_mm": verify,
+            "release_z_mm": cycles[0]["release_z_mm"], "verification_z_mm": cycles[0]["verification_z_mm"],
+            "last_release_z_mm": cycles[-1]["release_z_mm"], "cycles": cycles,
             "rotation": rotation, "rotation_candidates": candidates,
+            "pickup_r_deg": pickup_r, "pickup_j4_deg": pickup_j4,
+            "pregrip_reorientation_deg": pickup_r - a["r"],
             "empty_return_r_deg": reset_r, "empty_return_delta_r_deg": reset_r - rb,
             "motion_mode": "MOVL_XYZ", "tool_offset": source["tool_offset"], "steps": steps}
 
@@ -253,7 +315,8 @@ class CoinRobot(Dobot):
         p, k = self.pose(), Kinematics()
         self.call("GetKinematics", C.byref(k))
         self.recorder["samples"].append({"t_s": time.perf_counter() - self.recorder["_clock"],
-                  "phase": self.phase, "pose": p, "tcp_velocity_mm_s": k.velocity,
+                  "phase": self.phase, "coin_index": getattr(self, "coin_index", None),
+                  "pose": p, "tcp_velocity_mm_s": k.velocity,
                   "tcp_acceleration_mm_s2": k.acceleration})
         return p
 
@@ -285,8 +348,17 @@ def run_steps(bot, plan, recorder):
         bot.check_stop()
         bot.phase = step["label"]
         event = {"phase": bot.phase, "start_s": time.perf_counter() - recorder["_clock"], "state": "running"}
+        coin_index = step.get("coin_index")
+        bot.coin_index = coin_index
+        coin = None
+        if coin_index is not None:
+            coins = recorder.setdefault("coins", [])
+            if len(coins) < coin_index:
+                coins.append({"coin_index": coin_index, "start_s": event["start_s"], "completed": False})
+            coin = coins[coin_index - 1]
+            event["coin_index"] = coin_index
         recorder["events"].append(event)
-        print(bot.phase, flush=True)
+        print(f"第{coin_index}枚：{bot.phase}" if coin_index else bot.phase, flush=True)
         if step["kind"] == "move":
             bot.move(Point(**step["point"]))
         elif step["kind"] == "suction":
@@ -294,21 +366,33 @@ def run_steps(bot, plan, recorder):
         else:
             bot.pause(step["seconds"])
         event.update(end_s=time.perf_counter() - recorder["_clock"], state="completed")
-        if step["label"] == "打开吸盘":
-            recorder["grip_started_s"] = event["end_s"]
-        elif step["label"] == "等待泄压释放":
-            recorder["release_finished_s"] = event["end_s"]
-        elif step["label"] == "释放后竖直抬起验证":
-            recorder["verification_lift_finished_s"] = event["end_s"]
+        milestone = step.get("milestone")
+        if coin is not None and milestone:
+            coin[milestone] = event["end_s"]
+            if milestone == "grip_started_s":
+                recorder.setdefault("grip_started_s", event["end_s"])
+            elif milestone in ("release_finished_s", "verification_lift_finished_s"):
+                recorder[milestone] = event["end_s"]
+            elif milestone == "cycle_finished_s":
+                coin["completed"] = True
+                coin["cycle_elapsed_s"] = event["end_s"] - coin["start_s"]
+                coin["grip_to_release_elapsed_s"] = coin["release_finished_s"] - coin["grip_started_s"]
+                samples = [s for s in recorder.get("samples", []) if s.get("coin_index") == coin_index]
+                coin["sampled_peak_tcp_velocity_mm_s"] = max((abs(s["tcp_velocity_mm_s"]) for s in samples), default=0)
+                recorder["coins_completed"] = coin_index
+                if recorder.get("_record_path"):
+                    write_json(recorder["_record_path"], {k: v for k, v in recorder.items() if not k.startswith("_")})
 
 
 def execute(plan, config):
     STOP_FILE.unlink(missing_ok=True)
     record = {"timestamp": datetime.now(timezone.utc).isoformat(), "completed": False,
               "plan": plan, "motion_profile": config["motion_profile"],
+              "coin_count": plan["coin_count"], "coins_completed": 0, "coins": [],
               "events": [], "samples": [], "visual_release_confirmation": "pending human observation"}
-    output = ROOT / "records/runs" / datetime.now().strftime("%Y%m%d_%H%M%S")
+    output = ROOT / "records/runs" / datetime.now().strftime("%Y%m%d_%H%M%S_%f")
     output.mkdir(parents=True, exist_ok=True)
+    record["_record_path"] = str(output / "record.json")
     try:
         with CoinRobot(config["port"], record) as bot:
             bot.ensure_no_alarms()
@@ -340,12 +424,14 @@ def execute(plan, config):
         raise
     finally:
         record.pop("_clock", None)
+        record.pop("_record_path", None)
         record["sampled_peak_tcp_velocity_mm_s"] = max((abs(s["tcp_velocity_mm_s"]) for s in record["samples"]), default=0)
         record["sampled_peak_tcp_acceleration_mm_s2"] = max((abs(s["tcp_acceleration_mm_s2"]) for s in record["samples"]), default=0)
         write_json(output / "record.json", record)
         write_json(RESULTS / "latest_run.json", record)
         print(f"运行记录：{output / 'record.json'}", flush=True)
-    print(f"完成：总耗时 {record['total_elapsed_s']:.3f} s，吸取到释放 {record['grip_to_release_elapsed_s']:.3f} s")
+    print(f"{record['coins_completed']}枚流程完成：总耗时 {record['total_elapsed_s']:.3f} s，"
+          f"首次吸取到最后释放 {record['grip_to_release_elapsed_s']:.3f} s")
 
 
 def preview(plan):
@@ -354,28 +440,43 @@ def preview(plan):
     import matplotlib.pyplot as plt
     plt.rcParams["font.sans-serif"] = ["Microsoft YaHei", "SimHei", "DejaVu Sans"]
     plt.rcParams["axes.unicode_minus"] = False
-    fig, axes = plt.subplots(1, 2, figsize=(12, 4.8), layout="constrained")
+    fig, axes = plt.subplots(1, 3, figsize=(15, 4.8), layout="constrained")
     a, b = plan["source"], plan["destination"]
-    axes[0].plot([0, 0, plan["distance_xy_mm"], plan["distance_xy_mm"]],
-                 [a["z"], plan["travel_z_mm"], plan["travel_z_mm"], plan["release_z_mm"]], "o-", color="#20546b")
+    first, last = plan["cycles"][0], plan["cycles"][-1]
+    for cycle, color, label, style in ((first, "#20546b", "第一枚", "o-"),
+                                       (last, "#a45f32", "最后一枚", "s--")):
+        axes[0].plot([0, 0, plan["distance_xy_mm"], plan["distance_xy_mm"]],
+                     [cycle["pick_z_mm"], plan["travel_z_mm"], plan["travel_z_mm"], cycle["release_z_mm"]],
+                     style, color=color, label=label, linewidth=1.5)
     axes[0].plot([plan["distance_xy_mm"]] * 2, [plan["release_z_mm"], plan["verification_z_mm"]],
                  "o-", color="#bd6535", label="放币后抬起")
     top = b["z"] + plan["obstacle_height_mm"]
     axes[0].fill_between([plan["distance_xy_mm"] * .4, plan["distance_xy_mm"] * .6],
                          b["z"], top, color="#cccccc", label="约30mm障碍示意")
-    axes[0].set(xlabel="沿 AB 方向 / mm", ylabel="机器人 Z / mm", title="单枚硬币门形搬运路径")
+    axes[0].set(xlabel="沿 AB 方向 / mm", ylabel="机器人 Z / mm", title=f"{plan['coin_count']}枚逐枚越障路径")
     axes[0].legend(fontsize=9);axes[0].grid(alpha=.2)
+    indices = [c["coin_index"] for c in plan["cycles"]]
+    axes[1].plot(indices, [c["pick_z_mm"] for c in plan["cycles"]], "o-", label="A取币高度")
+    axes[1].plot(indices, [c["release_z_mm"] for c in plan["cycles"]], "s-", label="B释放高度")
+    axes[1].set(xlabel="第几枚", ylabel="机器人 Z / mm", title="源堆下降 / 目标堆上升", xticks=indices)
+    axes[1].legend(fontsize=9);axes[1].grid(alpha=.2)
     points = [s["point"] for s in plan["steps"] if s["kind"] == "move"]
-    axes[1].plot([p["x"] for p in points], [p["y"] for p in points], "o-", color="#20546b")
-    axes[1].annotate("A：取币\n高位旋转+180°", (a["x"], a["y"]), xytext=(8, -18),
-                     textcoords="offset points", fontsize=10, va="top")
-    axes[1].annotate("B：放币\n抬起观察", (b["x"], b["y"]), xytext=(-10, 14),
+    axes[2].plot([p["x"] for p in points], [p["y"] for p in points], "o-", color="#20546b")
+    axes[2].annotate(f"A：取币\n{plan['rotation']['direction_cn']}{plan['rotation']['delta_deg']:+.0f}°",
+                     (a["x"], a["y"]), xytext=(5, 12), textcoords="offset points", fontsize=10)
+    axes[2].annotate("B：逐枚堆叠", (b["x"], b["y"]), xytext=(-5, -28),
                      textcoords="offset points", fontsize=10, ha="right")
-    axes[1].set(xlabel="X / mm", ylabel="Y / mm", title="平面路径与旋转位置")
-    axes[1].set_aspect("equal");axes[1].grid(alpha=.2)
+    axes[2].set(xlabel="X / mm", ylabel="Y / mm", title="高位往返；低处仅竖直运动")
+    axes[2].set_aspect("equal");axes[2].grid(alpha=.2)
+    axes[2].set_ylim(min(a["y"], b["y"]) - 30, max(a["y"], b["y"]) + 30)
     folder = RESULTS;folder.mkdir(parents=True, exist_ok=True)
     fig.savefig(folder / "transfer_path.png", dpi=180)
     plt.close(fig)
+    lines = ["# 逐枚取放高度表", "", f"数量：{plan['coin_count']}；单枚厚度：{plan['coin_thickness_mm']:.6f} mm。",
+             "", "| 枚序 | A取币Z / mm | B释放Z / mm | 释放后抬起Z / mm |", "|---|---:|---:|---:|"]
+    for c in plan["cycles"]:
+        lines.append(f"| {c['coin_index']} | {c['pick_z_mm']:.3f} | {c['release_z_mm']:.3f} | {c['verification_z_mm']:.3f} |")
+    (folder / "height_schedule.md").write_text("\n".join(lines) + "\n", encoding="utf-8")
 
 
 def main():
@@ -384,6 +485,7 @@ def main():
     parser.add_argument("--config", type=Path, default=ROOT / "demo_config.json")
     parser.add_argument("--execute", action="store_true")
     parser.add_argument("--rotation", choices=("auto", "ccw", "cw"))
+    parser.add_argument("--coin-thickness", type=float, help="覆盖单枚厚度估计，mm")
     args = parser.parse_args()
     if args.action == "stop":
         STOP_FILE.write_text(datetime.now(timezone.utc).isoformat(), encoding="ascii")
@@ -392,10 +494,13 @@ def main():
     config = read_json(args.config)
     if args.rotation:
         config["rotation_direction"] = args.rotation
+    if args.coin_thickness is not None:
+        config["coin_thickness_mm"] = args.coin_thickness
+        config["thickness_source"] = "command-line override"
     plan = build_plan(read_json(ROOT / "source_A.json"), read_json(ROOT / "destination_B.json"), config)
     write_json(ROOT / "records/output/transfer_plan.json", plan)
     preview(plan)
-    print(json.dumps({k: plan[k] for k in ("distance_xy_mm", "travel_z_mm", "release_z_mm", "verification_z_mm", "rotation")},
+    print(json.dumps({k: plan[k] for k in ("coin_count", "coin_thickness_mm", "distance_xy_mm", "travel_z_mm", "release_z_mm", "last_release_z_mm", "rotation")},
                      ensure_ascii=False, indent=2))
     if args.action == "run" and args.execute:
         execute(plan, config)
