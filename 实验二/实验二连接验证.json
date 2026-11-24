@@ -1,0 +1,172 @@
+{
+  "stage": "read-only connection assessment",
+  "connection": {
+    "port": "COM7",
+    "adapter": "USB-SERIAL CH340",
+    "vid_pid": "1A86:7523",
+    "baud": 115200,
+    "format": "8N1"
+  },
+  "sdk": {
+    "timestamp": "2026-11-24T17:06:11.655672+08:00",
+    "dll_relative_to_experiment2": "../实验一/3.平面绘图操作/code/sdk_x64/DobotDll.dll",
+    "python_wrapper_relative_to_experiment2": "../实验一/3.平面绘图操作/code/dobot_sdk.py",
+    "firmware_type": "DobotSerial",
+    "position_mm": {
+      "x": 131.2060089111328,
+      "y": 0,
+      "z": -9.56494140625
+    },
+    "orientation_r_deg": 0,
+    "joint_angles_deg": {
+      "j1": 0,
+      "j2": 12.981964111328125,
+      "j3": 73.73206329345703,
+      "j4": 0
+    },
+    "configured_tool_offset_mm": {
+      "x": 59.70000076293945,
+      "y": 0,
+      "z": 0
+    },
+    "alarm_bytes": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "serial_protocol": {
+    "sdk_results_match": true,
+    "initial_pose_reads": [
+      {
+        "timestamp": "2026-11-24T17:02:01.8976404+08:00",
+        "port": "COM7",
+        "request_hex": "AA-AA-02-0A-00-F6",
+        "bytes": 38,
+        "response_hex": "AA-AA-22-0A-00-BD-34-03-43-00-00-00-00-00-0A-19-C1-00-00-00-00-00-00-00-00-20-B6-4F-41-D1-76-93-42-00-00-00-00-59",
+        "checksum_valid": true,
+        "pose": {
+          "x_mm": 131.2060089111328,
+          "y_mm": 0,
+          "z_mm": -9.56494140625,
+          "r_deg": 0,
+          "j1_deg": 0,
+          "j2_deg": 12.981964111328125,
+          "j3_deg": 73.73206329345703,
+          "j4_deg": 0
+        }
+      },
+      {
+        "timestamp": "2026-11-24T17:02:02.5988707+08:00",
+        "port": "COM7",
+        "request_hex": "AA-AA-02-0A-00-F6",
+        "bytes": 38,
+        "response_hex": "AA-AA-22-0A-00-BD-34-03-43-00-00-00-00-00-0A-19-C1-00-00-00-00-00-00-00-00-20-B6-4F-41-D1-76-93-42-00-00-00-00-59",
+        "checksum_valid": true,
+        "pose": {
+          "x_mm": 131.2060089111328,
+          "y_mm": 0,
+          "z_mm": -9.56494140625,
+          "r_deg": 0,
+          "j1_deg": 0,
+          "j2_deg": 12.981964111328125,
+          "j3_deg": 73.73206329345703,
+          "j4_deg": 0
+        }
+      }
+    ],
+    "cross_check": [
+      {
+        "timestamp": "2026-11-24T17:04:49.7541226+08:00",
+        "port": "COM7",
+        "request_hex": "AA-AA-02-0A-00-F6",
+        "bytes": 38,
+        "response_hex": "AA-AA-22-0A-00-BD-34-03-43-00-00-00-00-00-0A-19-C1-00-00-00-00-00-00-00-00-20-B6-4F-41-D1-76-93-42-00-00-00-00-59",
+        "command": "GetPose",
+        "checksum_valid": true,
+        "decoded_values": [
+          131.2060089111328,
+          0,
+          -9.56494140625,
+          0,
+          0,
+          12.981964111328125,
+          73.73206329345703,
+          0
+        ]
+      },
+      {
+        "timestamp": "2026-11-24T17:04:50.1340294+08:00",
+        "port": "COM7",
+        "request_hex": "AA-AA-02-3C-00-C4",
+        "bytes": 18,
+        "response_hex": "AA-AA-0E-3C-00-CD-CC-6E-42-00-00-00-00-00-00-00-00-7B",
+        "command": "GetEndEffectorParams",
+        "checksum_valid": true,
+        "decoded_values": [
+          59.70000076293945,
+          0,
+          0
+        ]
+      },
+      {
+        "timestamp": "2026-11-24T17:04:50.4661722+08:00",
+        "port": "COM7",
+        "request_hex": "AA-AA-02-14-00-EC",
+        "bytes": 22,
+        "response_hex": "AA-AA-12-14-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-00-EC",
+        "command": "GetAlarmsState",
+        "checksum_valid": true,
+        "decoded_values": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    "cross_check_value_order": {
+      "GetPose": [
+        "x_mm",
+        "y_mm",
+        "z_mm",
+        "r_deg",
+        "j1_deg",
+        "j2_deg",
+        "j3_deg",
+        "j4_deg"
+      ],
+      "GetEndEffectorParams": [
+        "x_mm",
+        "y_mm",
+        "z_mm"
+      ],
+      "GetAlarmsState": "raw bytes"
+    }
+  }
+}

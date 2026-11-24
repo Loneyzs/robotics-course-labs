@@ -1,0 +1,55 @@
+{
+  "timestamp": "2026-11-24T17:15:36.296463+08:00",
+  "pose": {
+    "x": 60.7248649597168,
+    "y": 0,
+    "z": -12.007858276367188,
+    "r": 0,
+    "j1": 0,
+    "j2": 0.6519775390625,
+    "j3": 90.19927978515625,
+    "j4": 0
+  },
+  "offset_mm": {
+    "x": 59.70000076293945,
+    "y": 0,
+    "z": 0
+  },
+  "alarm_bytes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    16,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "joint_velocity_deg_s": [
+    200,
+    200,
+    200,
+    200
+  ],
+  "joint_acceleration_deg_s2": [
+    200,
+    200,
+    200,
+    200
+  ],
+  "velocity_ratio": 100,
+  "acceleration_ratio": 100,
+  "context": "Read-only after operator power cycle; operator reported a physical J1 stop.",
+  "alarm_codes": [
+    "0x44",
+    "0x49"
+  ]
+}
